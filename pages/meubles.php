@@ -81,6 +81,11 @@ require_once "../includes/header.php";
 <div class="container py-5">
 
     <h1 class="text-center mb-4">Nos meubles</h1>
+    <div class="mb-4">
+    <a href="../index.php" class="btn btn-outline-dark">
+        ← Retour à l'accueil
+    </a>
+</div>
 
 
 
