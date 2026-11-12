@@ -23,6 +23,7 @@ $sql = "
     SELECT
         MEUBLE.id_meuble,
         MEUBLE.nom,
+        MEUBLE.image,
         MEUBLE.description,
         MEUBLE.prix_journalier,
         MEUBLE.quantite_stock,
@@ -140,9 +141,39 @@ require_once "../includes/header.php";
 
                 <div class="col-md-4 mb-4">
 
-                    <div class="card h-100 shadow-sm">
+                   <div class="card h-100 shadow-sm">
 
-                        <div class="card-body">
+    <?php if (!empty($meuble['image'])): ?>
+
+        <img
+            src="../<?= htmlspecialchars($meuble['image']) ?>"
+            class="card-img-top"
+            alt="<?= htmlspecialchars($meuble['nom']) ?>"
+            style="height: 220px; object-fit: cover;"
+        >
+
+    <?php else: ?>
+
+        <div class="text-center bg-light p-5">
+            Photo non disponible
+        </div>
+
+    <?php endif; ?>
+
+    <div class="card-body">
+        <?php if ($meuble['quantite_stock'] > 0): ?>
+
+    <span class="badge bg-success mb-2">
+        Disponible
+    </span>
+
+<?php else: ?>
+
+    <span class="badge bg-danger mb-2">
+        Indisponible
+    </span>
+
+<?php endif; ?>
 
                             <h5 class="card-title">
                                 <?= htmlspecialchars($meuble['nom']) ?>
@@ -157,19 +188,26 @@ require_once "../includes/header.php";
                                 <?= htmlspecialchars($meuble['description']) ?>
                             </p>
 
-                            <p>
-                                Prix journalier :
-                                <strong>
-                                    <?= number_format($meuble['prix_journalier'], 0, ',', ' ') ?>
-                                    FCFA
-                                </strong>
-                            </p>
+      <div class="mb-3">
+    <small class="text-muted">Prix de location</small>
+
+    <h4 class="text-primary fw-bold">
+        <?= number_format($meuble['prix_journalier'], 0, ',', ' ') ?>
+        FCFA
+        <small class="text-muted fs-6">/ jour</small>
+    </h4>
+</div>
 
                             <p>
                                 Quantité disponible :
                                 <?= htmlspecialchars($meuble['quantite_stock']) ?>
                             </p>
-
+<a
+    href="details_meuble.php?id=<?= (int) $meuble['id_meuble'] ?>"
+    class="btn btn-outline-dark w-100"
+>
+    Voir les détails
+</a>
                         </div>
 
                     </div>
@@ -181,7 +219,7 @@ require_once "../includes/header.php";
         <?php else: ?>
 
             <div class="alert alert-info text-center">
-                Aucun meuble disponible pour le moment.
+                Aucun meuble ne correspond à votre recherche.
             </div>
 
         <?php endif; ?>
