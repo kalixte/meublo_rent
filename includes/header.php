@@ -5,48 +5,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MEUBLO RENT</title>
+    <title>MEUBLE RENT</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap 5.3.9 installé avec npm -->
+    <link rel="stylesheet" href="/meublo_rent/assets/bootstrap.min.css">
+
+    <!-- Notre CSS personnalisé -->
+    <link rel="stylesheet" href="/meublo_rent/assets/CSS/style.css">
+
 </head>
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<!-- Barre de navigation -->
+<nav class="navbar navbar-expand-lg navbar-meuble sticky-top">
     <div class="container">
 
-        <a class="navbar-brand fw-bold" href="index.php">
-            MEUBLO RENT
+        <!-- Logo et nom -->
+        <a class="navbar-brand fw-bold" href="/meublo_rent/index.php">
+            <span class="logo-icon">M</span>
+            MEUBLE RENT
         </a>
 
-        <button class="navbar-toggler" type="button"
+        <!-- Bouton pour mobile -->
+        <button
+            class="navbar-toggler"
+            type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#menuNavigation">
+            data-bs-target="#menuPrincipal"
+            aria-controls="menuPrincipal"
+            aria-expanded="false"
+            aria-label="Ouvrir le menu"
+        >
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="menuNavigation">
-            <ul class="navbar-nav ms-auto">
+        <!-- Liens de navigation -->
+        <div class="collapse navbar-collapse" id="menuPrincipal">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="index.php">Accueil</a>
+                    <a class="nav-link active" href="/meublo_rent/index.php">
+                        Accueil
+                    </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="pages/meubles.php">Nos meubles</a>
+                    <a class="nav-link" href="/meublo_rent/pages/meubles.php">
+                        Nos meubles
+                    </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="pages/connexion.php">Connexion</a>
+                    <a class="nav-link" href="/meublo_rent/pages/connexion.php">
+                        Connexion
+                    </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="pages/inscription.php">Inscription</a>
+                    <a class="btn btn-orange" href="/meublo_rent/pages/inscriptin.php">
+                        Créer un compte
+                    </a>
                 </li>
 
             </ul>
-        </div>
 
+        </div>
     </div>
 </nav>

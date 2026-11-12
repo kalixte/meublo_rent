@@ -3,6 +3,25 @@
 
 // Connexion à la base de données
 require_once "../config/database.php";
+
+
+// Récupérer les 3 derniers meubles
+$sqlAccueil = "
+    SELECT
+        MEUBLE.id_meuble,
+        MEUBLE.nom,
+        MEUBLE.image,
+        MEUBLE.prix_journalier,
+        MEUBLE.quantite_stock,
+        CATEGORIE.libelle AS categorie
+    FROM MEUBLE
+    INNER JOIN CATEGORIE
+        ON MEUBLE.id_categorie = CATEGORIE.id_categorie
+    ORDER BY MEUBLE.id_meuble DESC
+    LIMIT 3
+";
+
+$meublesAccueil = $connexion->query($sqlAccueil)->fetchAll();
 $recherche = trim($_GET['recherche'] ?? '');
 // Récupérer toutes les catégories
 $sqlCategories = "SELECT * FROM CATEGORIE ORDER BY libelle ASC";
@@ -151,11 +170,10 @@ require_once "../includes/header.php";
     <?php if (!empty($meuble['image'])): ?>
 
         <img
-            src="../<?= htmlspecialchars($meuble['image']) ?>"
-            class="card-img-top"
-            alt="<?= htmlspecialchars($meuble['nom']) ?>"
-            style="height: 220px; object-fit: cover;"
-        >
+    src="/meublo_rent/<?= htmlspecialchars($meuble['image']) ?>"
+    class="card-img-top"
+    alt="<?= htmlspecialchars($meuble['nom']) ?>"
+>
 
     <?php else: ?>
 
