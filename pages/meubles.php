@@ -157,31 +157,30 @@ require_once "../includes/header.php";
 
 
 
-    <div class="row">
+    <div class="row g-4">
 
         <?php if (count($meubles) > 0): ?>
 
             <?php foreach ($meubles as $meuble): ?>
 
-                <div class="col-md-4 mb-4">
+               <div class="col-12 col-sm-6 col-lg-4 d-flex">
+    <div class="card meuble-card w-100">
 
-                   <div class="card h-100 shadow-sm">
+  <?php if (!empty($meuble['image'])): ?>
 
-    <?php if (!empty($meuble['image'])): ?>
+    <img
+        src="../<?= htmlspecialchars($meuble['image']) ?>"
+        class="card-img-top"
+        alt="<?= htmlspecialchars($meuble['nom']) ?>"
+    >
 
-        <img
-    src="/meublo_rent/<?= htmlspecialchars($meuble['image']) ?>"
-    class="card-img-top"
-    alt="<?= htmlspecialchars($meuble['nom']) ?>"
->
+<?php else: ?>
 
-    <?php else: ?>
+    <div class="photo-indisponible">
+        Photo non disponible
+    </div>
 
-        <div class="text-center bg-light p-5">
-            Photo non disponible
-        </div>
-
-    <?php endif; ?>
+<?php endif; ?>
 
     <div class="card-body">
         <?php if ($meuble['quantite_stock'] > 0): ?>

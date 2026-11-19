@@ -39,86 +39,90 @@ if (!$meuble) {
 ?>
 <?php require_once "../includes/header.php"; ?>
 
+
 <div class="container py-5">
 
-    <div class="row justify-content-center">
+    <div class="row g-4 align-items-center">
 
-        <div class="col-md-8">
+        <!-- Photo du meuble -->
+        <div class="col-md-6">
 
-            <div class="card shadow">
+            <div class="meuble-detail-image">
 
-                <!-- Image du meuble -->
-                <div class="card-body text-center">
+                <?php if (!empty($meuble['image'])): ?>
 
-                    <?php if (!empty($meuble['image'])): ?>
+                    <img
+                        src="../<?= htmlspecialchars($meuble['image']) ?>"
+                        alt="<?= htmlspecialchars($meuble['nom']) ?>"
+                    >
 
-                        <img
-                            src="../<?= htmlspecialchars($meuble['image']) ?>"
-                            class="img-fluid rounded mb-4"
-                            style="max-height: 350px;"
-                            alt="<?= htmlspecialchars($meuble['nom']) ?>"
-                        >
+                <?php else: ?>
 
-                    <?php else: ?>
+                    <div class="photo-indisponible">
+                        Image non disponible
+                    </div>
 
-                        <p class="text-muted">Image non disponible</p>
-
-                    <?php endif; ?>
-
-                    <!-- Nom du meuble -->
-                    <h2 class="fw-bold">
-                        <?= htmlspecialchars($meuble['nom']) ?>
-                    </h2>
-                    <p class="text-muted">
-    Catégorie :
-    <strong><?= htmlspecialchars($meuble['categorie']) ?></strong>
-</p>
-
-                    <!-- Description -->
-                    <p class="text-muted mt-3">
-                        <?= nl2br(htmlspecialchars($meuble['description'])) ?>
-                    </p>
-
-                    <hr>
-
-                    <!-- Prix -->
-                    <h4 class="text-success">
-                        <?= number_format($meuble['prix_journalier'], 0, ',', ' ') ?> FCFA / jour
-                    </h4>
-
-                    <!-- Quantité disponible -->
-                    <div class="mt-3">
-
-    <p>
-        Quantité disponible :
-        <strong>
-            <?= htmlspecialchars($meuble['quantite_stock']) ?>
-        </strong>
-    </p>
-
-    <?php if ($meuble['quantite_stock'] > 0): ?>
-
-        <span class="badge bg-success">
-            Ce meuble est disponible à la location
-        </span>
-
-    <?php else: ?>
-
-        <span class="badge bg-danger">
-            Ce meuble est actuellement indisponible
-        </span>
-
-    <?php endif; ?>
-
-</div>
-
-                    <a href="meubles.php" class="btn btn-secondary mt-3">
-                        Retour aux meubles
-                    </a>
-
-                </div>
+                <?php endif; ?>
 
             </div>
+
+        </div>
+
+        <!-- Informations du meuble -->
+        <div class="col-md-6">
+
+            <span class="badge bg-warning text-dark mb-3">
+                <?= htmlspecialchars($meuble['categorie']) ?>
+            </span>
+
+            <h1 class="fw-bold mb-3">
+                <?= htmlspecialchars($meuble['nom']) ?>
+            </h1>
+
+            <p class="text-muted">
+                <?= nl2br(htmlspecialchars($meuble['description'])) ?>
+            </p>
+
+            <hr>
+
+            <h2 class="prix-meuble mb-3">
+                <?= number_format($meuble['prix_journalier'], 0, ',', ' ') ?>
+                FCFA
+                <small>/ jour</small>
+            </h2>
+
+            <p>
+                Quantité disponible :
+                <strong>
+                    <?= htmlspecialchars($meuble['quantite_stock']) ?>
+                </strong>
+            </p>
+
+            <?php if ($meuble['quantite_stock'] > 0): ?>
+
+                <span class="badge bg-success mb-3">
+                    Disponible à la location
+                </span>
+
+                <div>
+                    <a href="../pages/inscriptin.php"
+                       class="btn btn-orange">
+                        Louer ce meuble
+                    </a>
+                </div>
+
+            <?php else: ?>
+
+                <span class="badge bg-danger mb-3">
+                    Actuellement indisponible
+                </span>
+
+            <?php endif; ?>
+
+            <a href="meubles.php"
+               class="btn btn-outline-secondary mt-3">
+                Retour aux meubles
+            </a>
 
         </div>
 
@@ -126,4 +130,5 @@ if (!$meuble) {
 
 </div>
 
-<?php require_once "../includes/footer.php"; ?>s
+
+<?php require_once "../includes/footer.php"; ?>
