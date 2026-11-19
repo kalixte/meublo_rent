@@ -98,26 +98,35 @@ if (!$meuble) {
                 </strong>
             </p>
 
-            <?php if ($meuble['quantite_stock'] > 0): ?>
+           <?php if ($meuble['quantite_stock'] > 0): ?>
 
-                <span class="badge bg-success mb-3">
-                    Disponible à la location
-                </span>
+    <span class="badge bg-success mb-3">
+        Disponible à la location
+    </span>
 
-                <div>
-                    <a href="../pages/inscriptin.php"
-                       class="btn btn-orange">
-                        Louer ce meuble
-                    </a>
-                </div>
+    <?php if (isset($_SESSION['id_client'])): ?>
 
-            <?php else: ?>
+        <a href="louer.php?id=<?= $meuble['id_meuble'] ?>"
+           class="btn btn-orange">
+            Louer ce meuble
+        </a>
 
-                <span class="badge bg-danger mb-3">
-                    Actuellement indisponible
-                </span>
+    <?php else: ?>
 
-            <?php endif; ?>
+        <a href="connexion.php?retour=details&id=<?= $meuble['id_meuble'] ?>"
+           class="btn btn-orange">
+            Se connecter pour louer
+        </a>
+
+    <?php endif; ?>
+
+<?php else: ?>
+
+    <span class="badge bg-danger mb-3">
+        Actuellement indisponible
+    </span>
+
+<?php endif; ?>
 
             <a href="meubles.php"
                class="btn btn-outline-secondary mt-3">

@@ -8,6 +8,8 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once "../config/database.php";
 
 $erreur = "";
+$retour = $_GET['retour'] ?? '';
+$id_meuble_retour = $_GET['id'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -45,9 +47,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['nom_client'] = $client['nom'];
             $_SESSION['prenom_client'] = $client['prenom'];
 
-            // Rediriger vers l'accueil
-            header("Location: ../index.php");
-            exit;
+           // Vérifier si le client doit revenir sur une fiche meuble
+if (
+    $retour === 'details' &&
+    filter_var($id_meuble_retour, FILTER_VALIDATE_INT) &&
+    $id_meuble_retour > 0
+) {
+    header("Location: details_meuble.php?id=" . $id_meuble_retour);
+    exit;
+}
+
+// Sinon, retourner à l'accueil
+header("Location: ../index.php");
+exit;
 
         } else {
             $erreur = "Adresse e-mail ou mot de passe incorrect.";
@@ -73,6 +85,11 @@ require_once "../includes/header.php";
                     <?php endif; ?>
 
                     <form method="POST" action="">
+                        <input type="hidden" name="retour"
+       value="<?= htmlspecialchars($retour) ?>">
+
+<input type="hidden" name="id"
+       value="<?= htmlspecialchars($id_meuble_retour) ?>">
 
                         <div class="mb-3">
                             <label class="form-label">Adresse e-mail</label>
